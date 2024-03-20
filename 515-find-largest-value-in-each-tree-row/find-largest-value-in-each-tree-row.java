@@ -22,8 +22,9 @@ class Solution {
             this.lvl = lvl;
         }
     }
+    ArrayList<Integer> ans = new ArrayList<>();
     public List<Integer> largestValues(TreeNode root) {
-        HashMap<Integer,Integer> map = new HashMap<>();
+       /* HashMap<Integer,Integer> map = new HashMap<>();
         Queue<Custom> q = new LinkedList<>();
         if(root == null) return new ArrayList<>();
         q.add(new Custom(root,0));
@@ -45,6 +46,16 @@ class Solution {
         for(Integer x : map.values()){
             list.add(x);
         }
-        return list;
+        return list;*/
+        LargeValues(root,0);
+        return ans;
+
+    }
+    public void LargeValues(TreeNode node,int lvl){
+         if(node == null) return;
+         if(ans.size() <= lvl) ans.add(node.val);
+         else ans.set(lvl,Math.max(node.val,ans.get(lvl)));
+         LargeValues(node.left,lvl+1);
+         LargeValues(node.right,lvl+1);
     }
 }
